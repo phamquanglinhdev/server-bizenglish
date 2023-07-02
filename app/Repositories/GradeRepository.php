@@ -32,5 +32,9 @@ class GradeRepository extends BaseRepository
             ->orderBy("created_at", "DESC")->first();
     }
 
+    public function getGradeById($id): Model|Builder|null
+    {
+        return $this->getBuilder()->where("id", $id)->first();
+    }
 
 }

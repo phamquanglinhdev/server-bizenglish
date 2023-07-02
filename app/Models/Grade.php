@@ -14,13 +14,23 @@ class Grade extends Model
 
     protected $table = "grades";
 
-    public function Students(): BelongsToMany|Builder|null
+    public function Students(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, "student_grade", "grade_id", "student_id")->where("type", 3);
+        return $this->belongsToMany(User::class, "student_grade", "grade_id", "student_id");
+    }
+
+    public function Teachers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, "teacher_grade", "grade_id", "teacher_id");
     }
 
     public function Logs(): HasMany|Builder|null
     {
         return $this->hasMany(Log::class, "grade_id", "id")->where("disable", 0);
+    }
+
+    public function Books(): BelongsToMany
+    {
+        return $this->belongsToMany(Bag::class, "grade_menus", "grade_id", "menu_id");
     }
 }

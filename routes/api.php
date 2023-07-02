@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\GradeController;
 use App\Http\Controllers\Api\LogController;
 use App\Http\Controllers\Api\UserController;
@@ -24,5 +25,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get("/student/logs/{grade_id?}", [LogController::class, "getLogsForStudent"]);
     Route::get("/student/calendar", [UserController::class, "getStudentCalendar"]);
     Route::get("/student/log/{log_id}", [LogController::class, "getLogForStudent"]);
+    Route::get("/student/grade/{grade_id}", [GradeController::class, "getGradeDetailForStudent"]);
+    Route::get("/book/home", [BookController::class, 'BookForHome']);
 });
 Route::post("/login", [UserController::class, "login"]);

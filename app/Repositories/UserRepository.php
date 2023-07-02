@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class UserRepository extends BaseRepository
 {
@@ -18,4 +19,5 @@ class UserRepository extends BaseRepository
     {
         return $this->getBuilder()->where("email", $email)->first();
     }
+
 }

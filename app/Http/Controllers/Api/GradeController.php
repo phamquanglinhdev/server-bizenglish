@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Dtos\Grade\GradeDetailDto;
 use App\Dtos\Grade\GradeListDto;
 use App\Http\Controllers\Controller;
 use App\Models\Grade;
@@ -37,6 +38,21 @@ class GradeController extends Controller
             remaining: $grade["minutes"] - $grade->Logs()->sum("duration"),
             days: ["T2", "T3"]
         ))->toArray())->toArray();
+    }
+
+    public function getGradeDetailForStudent(Request $request, $grade_id): array
+    {
+        /**
+         * @var User $student
+         * @var Grade $grade
+         */
+        $student = $request->user();
+        $grade = $this->gradeRepository->getGradeById($grade_id);
+        if (!$grade) {
+            return [];
+        }
+        return (new GradeDetailDto(grade: $grade))->toArray();
+
     }
 
 }
