@@ -16,7 +16,8 @@ use Illuminate\Http\Request;
 class ConversationController extends Controller
 {
     public function __construct(
-        private readonly ConversationRepository $conversationRepository
+        private readonly ConversationRepository $conversationRepository,
+        private readonly SyncConversation       $syncConversation
     )
     {
     }
@@ -26,6 +27,7 @@ class ConversationController extends Controller
         /**
          * @var User $student
          */
+        $this->syncConversation->syncGrade($request);
         $student = $request->user();
         $conversations = $this->conversationRepository->getConversationByStudentId($student["id"]);
         return $conversations->map(fn(Conversation $conversation) => (new ConversationListDto(conversation: $conversation))->toArray())->toArray();

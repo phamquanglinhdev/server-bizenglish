@@ -17,6 +17,7 @@ class ConversationListDto
 
     public function toArray(): array
     {
+
         /**
          * @var Conversation $conversation
          */
