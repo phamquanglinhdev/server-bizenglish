@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\Api\BookController;
+use App\Http\Controllers\Api\ConversationController;
 use App\Http\Controllers\Api\GradeController;
 use App\Http\Controllers\Api\LogController;
+use App\Http\Controllers\Api\SyncConversation;
 use App\Http\Controllers\Api\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,5 +28,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get("/student/log/{log_id}", [LogController::class, "getLogForStudent"]);
     Route::get("/student/grade/{grade_id}", [GradeController::class, "getGradeDetailForStudent"]);
     Route::get("/book/home", [BookController::class, 'BookForHome']);
+    Route::get("/conversation/sync", [SyncConversation::class, "syncGrade"]);
+    Route::get("/student/conversations", [ConversationController::class, "getConversationsForStudent"]);
+    Route::get("/conversation/{socket_id}", [ConversationController::class, "getConversationBySocketId"]);
+    Route::post("/chat/create", [ConversationController::class, "createChat"]);
 });
 Route::post("/login", [UserController::class, "login"]);
