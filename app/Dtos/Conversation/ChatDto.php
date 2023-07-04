@@ -26,7 +26,7 @@ class ChatDto
             'conversation_id' => $chat['conversation_id'],
             'type' => $chat["type"],
             'content' => $chat['text'],
-            'time' => Carbon::parse($chat["created_at"])->isoFormat("DD-MM-YYYY H:m")
+            'time' => Carbon::parse($chat["created_at"])->isoFormat("DD-MM-YYYY HH:mm")
         ];
     }
 }
