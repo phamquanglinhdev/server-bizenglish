@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\ConversationController;
+use App\Http\Controllers\Api\DeviceController;
 use App\Http\Controllers\Api\GradeController;
 use App\Http\Controllers\Api\LogController;
 use App\Http\Controllers\Api\SyncConversation;
@@ -32,5 +33,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get("/student/conversations", [ConversationController::class, "getConversationsForStudent"]);
     Route::get("/conversation/{socket_id}", [ConversationController::class, "getConversationBySocketId"]);
     Route::post("/chat/create", [ConversationController::class, "createChat"]);
+    Route::post("/device", [DeviceController::class, "addToken"]);
+
 });
 Route::post("/login", [UserController::class, "login"]);
+
