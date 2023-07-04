@@ -24,9 +24,9 @@ class UserSettingDto
             'name' => $student['name'],
             'avatar' => $student["avatar"],
             'code' => $student["code"],
-            'phone' => $student['phone'],
+            'phone' => $student['phone'] ?? "",
             'email' => $student['email'],
-            'parent' => $student['parent_name']
+            'parent' => $student['parent_name'] ?? ""
         ];
     }
 }
