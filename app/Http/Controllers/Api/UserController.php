@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Dtos\User\CurrentGradeUserDto;
 use App\Dtos\User\UserAuthDtos;
 use App\Dtos\User\UserCalendarDto;
+use App\Dtos\User\UserSettingDto;
 use App\Http\Controllers\Controller;
 use App\Models\Grade;
 use App\Models\User;
@@ -92,6 +93,15 @@ class UserController extends Controller
             }
         }
         return $times;
+    }
+
+    public function getProfile(Request $request): array
+    {
+        /**
+         * @var  User $student
+         */
+        $student = $request->user();
+        return (new UserSettingDto(user: $student))->toArray();
     }
 
 }

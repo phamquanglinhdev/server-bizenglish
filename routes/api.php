@@ -34,6 +34,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get("/conversation/{socket_id}", [ConversationController::class, "getConversationBySocketId"]);
     Route::post("/chat/create", [ConversationController::class, "createChat"]);
     Route::post("/device", [DeviceController::class, "addToken"]);
+    Route::post("/user/setting", [UserController::class, "getProfile"]);
 
 });
 Route::post("/login", [UserController::class, "login"]);
