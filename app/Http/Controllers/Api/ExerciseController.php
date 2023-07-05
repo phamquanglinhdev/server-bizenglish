@@ -28,7 +28,7 @@ class ExerciseController extends Controller
         return $logs->map(function (Log $log) {
             return [
                 'id' => $log['id'],
-                'lesson' => Str::limit($log["lesson"], 5),
+                'lesson' => $log["lesson"],
                 'time' => Carbon::parse($log['date'])->isoFormat("DD/MM") . " " . $log['start'] . " - " . $log["end"],
                 'grade' => $log->Grade()->first()->name,
                 'question' => $log["question"]
