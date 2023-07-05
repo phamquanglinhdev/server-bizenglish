@@ -37,7 +37,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post("/device", [DeviceController::class, "addToken"]);
     Route::get("/user/setting", [UserController::class, "getProfile"]);
     Route::post("/upload/image", [UploadController::class, "imageUpload"]);
-
+    Route::post("/upload/video", [UploadController::class, "videoUpload"]);
 });
 Route::post("/login", [UserController::class, "login"]);
 
