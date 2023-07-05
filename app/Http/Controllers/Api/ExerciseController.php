@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Exercise;
 use App\Models\Log;
 use App\Models\User;
 use App\Repositories\LogRepository;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class ExerciseController extends Controller
@@ -34,5 +38,21 @@ class ExerciseController extends Controller
                 'question' => $log["question"]
             ];
         })->toArray();
+    }
+
+    public function createExercise(Request $request): Model|Builder
+    {
+        /**
+         * @var User $student
+         */
+        $student = $request->user();
+        $dataCreate = [
+            'student_id' => $student["id"],
+            "log_id" => $request["log_id"],
+            "video" => $request["video"],
+            "paragraph" => $request["paragraph"],
+            "document" => $request["document"]
+        ];
+        return Exercise::query()->create($dataCreate);
     }
 }
