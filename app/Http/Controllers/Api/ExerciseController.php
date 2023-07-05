@@ -30,7 +30,8 @@ class ExerciseController extends Controller
                 'id' => $log['id'],
                 'lesson' => Str::limit($log["lesson"], 5),
                 'time' => Carbon::parse($log['date'])->isoFormat("DD/MM") . " " . $log['start'] . " - " . $log["end"],
-                'grade' => $log->Grade()->first()->name
+                'grade' => $log->Grade()->first()->name,
+                'question' => $log["question"]
             ];
         })->toArray();
     }
