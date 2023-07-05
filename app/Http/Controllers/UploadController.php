@@ -15,10 +15,10 @@ class UploadController extends Controller
         return url("/uploads/application/" . $upload);
     }
 
-    public function videoUpload(Request $request): string
+    public function mediaUpload(Request $request): string
     {
-        $video = $request->file("video");
-        $upload = Storage::disk("application")->put("/video/", $video);
+        $video = $request->file("media");
+        $upload = Storage::disk("application")->put("/media/", $video);
         return url("/uploads/application/" . $upload);
     }
 }
