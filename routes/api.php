@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\GradeController;
 use App\Http\Controllers\Api\LogController;
 use App\Http\Controllers\Api\SyncConversation;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,7 +36,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post("/chat/create", [ConversationController::class, "createChat"]);
     Route::post("/device", [DeviceController::class, "addToken"]);
     Route::get("/user/setting", [UserController::class, "getProfile"]);
+    Route::post("/upload/image", [UploadController::class, "imageUpload"]);
 
 });
 Route::post("/login", [UserController::class, "login"]);
+
 
