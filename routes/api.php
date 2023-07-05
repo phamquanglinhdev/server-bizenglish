@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\ConversationController;
 use App\Http\Controllers\Api\DeviceController;
+use App\Http\Controllers\Api\ExerciseController;
 use App\Http\Controllers\Api\GradeController;
 use App\Http\Controllers\Api\LogController;
 use App\Http\Controllers\Api\SyncConversation;
@@ -38,6 +39,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get("/user/setting", [UserController::class, "getProfile"]);
     Route::post("/upload/image", [UploadController::class, "imageUpload"]);
     Route::post("/upload/video", [UploadController::class, "videoUpload"]);
+    Route::get("/exercise/log", [ExerciseController::class, "getLog"]);
 });
 Route::post("/login", [UserController::class, "login"]);
 
