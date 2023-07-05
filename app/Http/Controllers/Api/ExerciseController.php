@@ -7,6 +7,8 @@ use App\Models\Log;
 use App\Models\User;
 use App\Repositories\LogRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 
 class ExerciseController extends Controller
 {
@@ -26,8 +28,8 @@ class ExerciseController extends Controller
         return $logs->map(function (Log $log) {
             return [
                 'id' => $log['id'],
-                'lesson' => $log["lesson"],
-                'time' => $log['date'] . " " . $log['start'] . " - " . $log["end"],
+                'lesson' => Str::limit($log["lesson"], 5),
+                'time' => Carbon::parse($log['date'])->isoFormat("DD/MM") . " " . $log['start'] . " - " . $log["end"],
                 'grade' => $log->Grade()->first()->name
             ];
         })->toArray();
