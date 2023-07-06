@@ -45,11 +45,12 @@ class ExerciseController extends Controller
         if ($request["accept"]) {
             return [
                 "accept" => 1,
+                "message" => 'Xác nhận đúng thông tin',
             ];
         } else {
             return [
                 'accept' => 0,
-                'comment' => "Xác nhận chưa đúng thông tin( " . $request["comment"] . " )"
+                'message' => "Xác nhận chưa đúng thông tin( " . $request["comment"] . " )"
             ];
         }
 
