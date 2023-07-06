@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 class LogDetailDto
 {
     public function __construct(
-        private readonly Model|Builder $log
+        private readonly Model|Builder $log,
+        private readonly mixed  $acp
     )
     {
     }
@@ -26,6 +27,11 @@ class LogDetailDto
             $video = json_decode($log["teacher_video"]);
             $video = "https://youtube.com/embed/$video->id";
         }
+        if ($this->acp) {
+            $acp = $this->acp->accept == 1 ? "Xác nhận đúng thông tin" : "Xác nhận chưa đúng thông tin( " . $this->acp->comment . " )";
+        } else {
+            $acp = "Chưa xác nhận";
+        }
         return [
             'video' => $video ?? null,
             'lesson' => $log["lesson"],
@@ -38,6 +44,8 @@ class LogDetailDto
             "information" => $log['information'],
             "exercise" => $log["question"] ?? "-",
             'attachments' => json_decode($log['attachments']),
+            'confirm' => $acp
+
         ];
     }
 }

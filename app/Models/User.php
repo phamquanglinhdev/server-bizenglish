@@ -5,10 +5,16 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @property int $id
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -47,5 +53,10 @@ class User extends Authenticatable
     public function StudentGrade(): BelongsToMany
     {
         return $this->belongsToMany(Grade::class, "student_grade", "student_id", "grade_id");
+    }
+
+    public function Accept(): Builder
+    {
+        return DB::table("student_log")->where("student_id", $this->id);
     }
 }

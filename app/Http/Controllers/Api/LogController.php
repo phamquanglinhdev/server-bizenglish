@@ -45,6 +45,7 @@ class LogController extends Controller
          * @var Log $log
          */
         $student = $request->user();
+        $acp = $student->Accept()->where("log_id", $log_id)->first();
         $log = $student->StudentGrade()->whereHas("logs", function (Builder $log) use ($log_id) {
             $log->where("id", $log_id);
         })->first()?->Logs()->where("id", $log_id)->first();
@@ -52,7 +53,7 @@ class LogController extends Controller
             return response()->json([], 404);
         }
 
-        return (new LogDetailDto(log: $log
+        return (new LogDetailDto(log: $log, acp:$acp
         ))->toArray();
     }
 }
