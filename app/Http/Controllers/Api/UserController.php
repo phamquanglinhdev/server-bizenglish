@@ -113,6 +113,7 @@ class UserController extends Controller
          */
         $student = $request->user();
         $student->update($request->all());
+        $student->save();
         return (new UserSettingDto(user: $student))->toArray();
     }
 
