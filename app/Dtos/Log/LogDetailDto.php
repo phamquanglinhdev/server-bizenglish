@@ -32,7 +32,7 @@ class LogDetailDto
             'date' => Carbon::parse($log["date"])->isoFormat("DD/MM/YYYY"),
             'time' => $log["start"] . "-" . $log["end"],
             'duration' => $log['duration'],
-            'grade' => $log->Teacher()->first()->name,
+            'grade' => $log->Grade()->first()->name,
             "teacher" => $log->Teacher()->first()->name,
             "note" => $log["assessment"] ?? "-",
             "information" => $log['information'],
