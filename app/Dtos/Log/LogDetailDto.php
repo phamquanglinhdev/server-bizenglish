@@ -11,7 +11,7 @@ class LogDetailDto
 {
     public function __construct(
         private readonly Model|Builder $log,
-        private readonly mixed  $acp
+        private readonly mixed         $acp
     )
     {
     }
@@ -28,9 +28,7 @@ class LogDetailDto
             $video = "https://youtube.com/embed/$video->id";
         }
         if ($this->acp) {
-            $acp = $this->acp->accept == 1 ? "Xác nhận đúng thông tin" : "Xác nhận chưa đúng thông tin( " . $this->acp->comment . " )";
-        } else {
-            $acp = "Chưa xác nhận";
+            $this->acp->message = $this->acp->accept == 1 ? "Xác nhận đúng thông tin" : "Xác nhận chưa đúng thông tin( " . $this->acp->comment . " )";
         }
         return [
             'video' => $video ?? null,
@@ -44,7 +42,7 @@ class LogDetailDto
             "information" => $log['information'],
             "exercise" => $log["question"] ?? "-",
             'attachments' => json_decode($log['attachments']),
-            'confirm' => $acp
+            'confirm' => $this->acp
 
         ];
     }
