@@ -37,7 +37,7 @@ class LogDetailDto
             "note" => $log["assessment"] ?? "-",
             "information" => $log['information'],
             "exercise" => $log["question"] ?? "-",
-            'attachments' => $log['attachments'],
+            'attachments' => json_decode($log['attachments']),
         ];
     }
 }
