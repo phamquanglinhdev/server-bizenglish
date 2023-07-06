@@ -27,9 +27,6 @@ class LogDetailDto
             $video = json_decode($log["teacher_video"]);
             $video = "https://youtube.com/embed/$video->id";
         }
-        if ($this->acp) {
-            $this->acp->message = $this->acp["accept"] == 1 ? "Xác nhận đúng thông tin" : "Xác nhận chưa đúng thông tin( " . $this->acp->comment . " )";
-        }
         return [
             'video' => $video ?? null,
             'lesson' => $log["lesson"],
