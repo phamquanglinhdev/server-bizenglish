@@ -35,7 +35,7 @@ class UserCalendarDto
     public function remainingDay()
     {
         $day = Carbon::parse($this->day);
-        $rm = Carbon::parse($day)->diffInDays()+1;
+        $rm = Carbon::parse($day)->diffInDays() + 1;
         if ($rm == 0) {
             return "Hôm nay";
         }
@@ -59,7 +59,8 @@ class UserCalendarDto
             'time' => $this->time,
             'day' => $this->dayTrans()[$this->day],
             'this_week' => $this->getDayOfWeekDay(),
-            'rm_day' => $this->remainingDay()
+            'rm_day' => $this->remainingDay(),
+            'raw' => Carbon::parse($this->day) . " " . $this->getStart()
         ];
     }
 }
