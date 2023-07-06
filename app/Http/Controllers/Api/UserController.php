@@ -88,7 +88,9 @@ class UserController extends Controller
             $time = json_decode($grade["time"]);
             foreach ($time as $item) {
                 $times[] = (new UserCalendarDto(
-                    grade: $grade["name"], time: $item->value, day: $item->day
+                    grade: $grade["name"],
+                    time: $item->value,
+                    day: $item->day,
                 ))->toArray();
             }
         }
