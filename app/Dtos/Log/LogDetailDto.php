@@ -3,6 +3,7 @@
 namespace App\Dtos\Log;
 
 use App\Models\Log;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,7 +29,7 @@ class LogDetailDto
         return [
             'video' => $video ?? null,
             'lesson' => $log["lesson"],
-            'date' => $log["date"],
+            'date' => Carbon::parse($log["date"])->isoFormat("DD/MM/YYYY"),
             'time' => $log["start"] . "-" . $log["end"],
             'duration' => $log['duration'],
             'grade' => $log->Teacher()->first()->name,
