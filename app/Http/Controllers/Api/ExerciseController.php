@@ -42,17 +42,7 @@ class ExerciseController extends Controller
             ];
             DB::table("student_log")->insert($data);
         }
-        if (!$request["accept"]) {
-            return [
-                "accept" => 0,
-                "message" => 'Xác nhận đúng thông tin',
-            ];
-        } else {
-            return [
-                'accept' => 1,
-                'message' => "Xác nhận chưa đúng thông tin( " . $request["comment"] . " )"
-            ];
-        }
+        return DB::table("student_log")->where("log_id", $request["log_id"])->where("student_id", $student["id"])->first();
 
     }
 
