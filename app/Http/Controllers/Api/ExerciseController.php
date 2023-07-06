@@ -42,7 +42,7 @@ class ExerciseController extends Controller
             ];
             DB::table("student_log")->insert($data);
         }
-        if ($request["accept"]) {
+        if (!$request["accept"]) {
             return [
                 "accept" => 0,
                 "message" => 'Xác nhận đúng thông tin',
