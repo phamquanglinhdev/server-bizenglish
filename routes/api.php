@@ -41,6 +41,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post("/upload/media", [UploadController::class, "mediaUpload"]);
     Route::get("/exercise/log", [ExerciseController::class, "getLog"]);
     Route::post("/exercise", [ExerciseController::class, "createExercise"]);
+    Route::post("student/report", [ExerciseController::class, "sendReport"]);
 });
 Route::post("/login", [UserController::class, "login"]);
 

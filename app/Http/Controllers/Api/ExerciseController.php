@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ExerciseController extends Controller
 {
@@ -18,6 +19,40 @@ class ExerciseController extends Controller
         private readonly LogRepository $logRepository
     )
     {
+    }
+
+    public function sendReport(Request $request)
+    {
+        /**
+         * @var User $student
+         */
+        $student = $request->user();
+        $rq = DB::table("student_log")->where("log_id", $request["log_id"])->where("student_id", $student["id"]);
+        if ($rq->count() > 0) {
+            $rq->update([
+                'accept' => $request['accept'] ? 1 : 0,
+                'comment' => $request['comment'] ?? null
+            ]);
+        } else {
+            $data = [
+                'student_id' => $student["id"],
+                'log_id' => $request["log_id"],
+                'accept' => $request['accept'] ? 1 : 0,
+                'comment' => $request['comment'] ?? null
+            ];
+            DB::table("student_log")->insert($data);
+        }
+        if ($request["accept"]) {
+            return [
+                "accept" => 1,
+            ];
+        } else {
+            return [
+                'accept' => 0,
+                'comment' => "Xác nhận chưa đúng thông tin( " . $request["comment"] . " )"
+            ];
+        }
+
     }
 
     public function getLog(Request $request): array
