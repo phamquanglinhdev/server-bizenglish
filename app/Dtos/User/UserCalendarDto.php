@@ -60,7 +60,7 @@ class UserCalendarDto
             'day' => $this->dayTrans()[$this->day],
             'this_week' => $this->getDayOfWeekDay(),
             'rm_day' => $this->remainingDay(),
-            'raw' => Carbon::parse($this->day) . " " . $this->getStart()
+            'raw' => Carbon::parse($this->day)->toDateString() . " " . $this->getStart()
         ];
     }
 }
