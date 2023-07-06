@@ -30,14 +30,14 @@ class ExerciseController extends Controller
         $rq = DB::table("student_log")->where("log_id", $request["log_id"])->where("student_id", $student["id"]);
         if ($rq->count() > 0) {
             $rq->update([
-                'accept' => $request['accept'] ? 1 : 0,
+                'accept' => $request['accept'],
                 'comment' => $request['comment'] ?? null
             ]);
         } else {
             $data = [
                 'student_id' => $student["id"],
                 'log_id' => $request["log_id"],
-                'accept' => $request['accept'] ? 0 : 1,
+                'accept' => $request['accept'],
                 'comment' => $request['comment'] ?? null
             ];
             DB::table("student_log")->insert($data);
