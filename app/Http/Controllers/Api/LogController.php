@@ -51,20 +51,8 @@ class LogController extends Controller
         if (!$log) {
             return response()->json([], 404);
         }
-        if ($log["teacher_video"]) {
-            $video = json_decode($log["teacher_video"]);
-            $video = "https://youtube.com/embed/$video->id";
-        }
-        return (new LogDetailDto(
-            video: $video ?? null,
-            title: $log["lesson"],
-            time: $log["date"] . $log["start"] . $log["end"],
-            grade: $log->Grade()->first()->name,
-            teacher: $log->Teacher()->first()->name,
-            student: $log->Grade()->first()->Students()->get(["id", "name"])->toArray(),
-            salary: number_format($log["hour_salary"]),
-            note: $log["assessment"] ?? "-",
-            exercise: $log["question"] ?? "-"
+
+        return (new LogDetailDto(log: $log
         ))->toArray();
     }
 }
