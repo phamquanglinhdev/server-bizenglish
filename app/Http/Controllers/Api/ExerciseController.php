@@ -37,19 +37,19 @@ class ExerciseController extends Controller
             $data = [
                 'student_id' => $student["id"],
                 'log_id' => $request["log_id"],
-                'accept' => $request['accept'] ? 1 : 0,
+                'accept' => $request['accept'] ? 0 : 1,
                 'comment' => $request['comment'] ?? null
             ];
             DB::table("student_log")->insert($data);
         }
         if ($request["accept"]) {
             return [
-                "accept" => 1,
+                "accept" => 0,
                 "message" => 'Xác nhận đúng thông tin',
             ];
         } else {
             return [
-                'accept' => 0,
+                'accept' => 1,
                 'message' => "Xác nhận chưa đúng thông tin( " . $request["comment"] . " )"
             ];
         }
