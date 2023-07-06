@@ -106,4 +106,14 @@ class UserController extends Controller
         return (new UserSettingDto(user: $student))->toArray();
     }
 
+    public function changeProfile(Request $request): array
+    {
+        /**
+         * @var  User $student
+         */
+        $student = $request->user();
+        $student->update($request->all());
+        return (new UserSettingDto(user: $student))->toArray();
+    }
+
 }

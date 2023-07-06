@@ -37,6 +37,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post("/chat/create", [ConversationController::class, "createChat"]);
     Route::post("/device", [DeviceController::class, "addToken"]);
     Route::get("/user/setting", [UserController::class, "getProfile"]);
+    Route::post("/user/change-profile", [UserController::class, "changeProfile"]);
     Route::post("/upload/image", [UploadController::class, "imageUpload"]);
     Route::post("/upload/media", [UploadController::class, "mediaUpload"]);
     Route::get("/exercise/log", [ExerciseController::class, "getLog"]);
