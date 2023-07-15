@@ -11,6 +11,7 @@ class Log extends Model
     use HasFactory;
 
     protected $table = "logs";
+    protected $guarded = ["id"];
 
     public function Grade(): BelongsTo
     {

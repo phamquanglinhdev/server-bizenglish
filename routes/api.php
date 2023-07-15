@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\LogController;
 use App\Http\Controllers\Api\SyncConversation;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\UploadController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,5 +46,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post("student/report", [ExerciseController::class, "sendReport"]);
 });
 Route::post("/login", [UserController::class, "login"]);
-
+Route::get("/minutes", function () {
+    Artisan::call("schedule:run");
+});
 

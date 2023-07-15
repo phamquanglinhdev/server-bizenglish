@@ -57,4 +57,9 @@ class User extends Authenticatable
     {
         return DB::table("student_log")->where("student_id", $this->id);
     }
+
+    public function Device(): HasMany
+    {
+        return $this->hasMany(Device::class, "user_id", "id");
+    }
 }
