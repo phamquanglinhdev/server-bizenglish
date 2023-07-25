@@ -23,6 +23,8 @@ class LogRepository extends BaseRepository
             $grade->whereHas("students", function (Builder $student) use ($studentId) {
                 $student->where("id", $studentId);
             });
+        })->whereHas("grade", function (Builder $grade) {
+            $grade->where("status", 0);
         })->where("disable", 0)->orderBy("date", "DESC")->get();
     }
 }
