@@ -33,7 +33,7 @@ class GradeController extends Controller
         return $grades->map(fn(Grade $grade) => (new GradeListDto(
             id: $grade["id"],
             name: $grade["name"],
-            status: $status[$grade["status"]], teacher_name: "-",
+            status: $status[$grade["status"]], teacher_name: $grade->Teachers()->first()->name,
             learn_minutes: $grade->Logs()->sum("duration"),
             remaining: $grade["minutes"] - $grade->Logs()->sum("duration"),
             days: ["T2", "T3"]
