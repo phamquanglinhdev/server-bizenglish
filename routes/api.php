@@ -51,4 +51,5 @@ Route::post("/login", [UserController::class, "login"]);
 Route::get("/minutes", function () {
     Artisan::call("schedule:run");
 });
+Route::get("/contest/{contest_id}/{user_id}",[ContestController::class,"play"]);
 
