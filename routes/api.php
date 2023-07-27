@@ -46,10 +46,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post("/exercise", [ExerciseController::class, "createExercise"]);
     Route::post("student/report", [ExerciseController::class, "sendReport"]);
     Route::post("/contest/", [ContestController::class, 'getContest']);
+
 });
 Route::post("/login", [UserController::class, "login"]);
 Route::get("/minutes", function () {
     Artisan::call("schedule:run");
 });
 Route::get("/contest/{contest_id}/{user_id}",[ContestController::class,"play"]);
+Route::post("/contest/submit", [ContestController::class, 'checkContest']);
 

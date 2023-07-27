@@ -8,6 +8,7 @@ use App\Models\Customer;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ContestController extends Controller
 {
@@ -55,5 +56,29 @@ class ContestController extends Controller
         $user = Customer::query()->where("id", $user_id)->first();
         $token = "Bearer " . $user->createToken("Bearer")->plainTextToken;
         return redirect("http://localhost:3000?token=" . $token . "&contest=" . $contest_id);
+    }
+
+    public function checkContest(Request $request)
+    {
+        $correctAnswer = 0;
+        foreach ($request["submitData"] as $data) {
+            if (isset($data["user_choose"])) {
+                if ($data["user_choose"] == $data["correct"]) {
+                    $correctAnswer += 1;
+                }
+            }
+            if (isset($data["user_type"])) {
+                if ($data["user_type"] == $data["correct_text"]) {
+                    $correctAnswer += 1;
+                }
+            }
+        }
+        DB::table("customer_contest")->where("contest_id", $request["contest_id"])->where("customer_id", $request->user()->id)->update([
+            'correct' => $correctAnswer,
+            'total' => count($request["submitData"]),
+            'correct_task' => $request['submitData'],
+            'score' => ($correctAnswer / count($request['submitData'])) * 100
+        ]);
+        return true;
     }
 }
