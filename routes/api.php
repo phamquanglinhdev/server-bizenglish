@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\BookController;
+use App\Http\Controllers\Api\ContestController;
 use App\Http\Controllers\Api\ConversationController;
 use App\Http\Controllers\Api\DeviceController;
 use App\Http\Controllers\Api\ExerciseController;
@@ -44,6 +45,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get("/exercise/log", [ExerciseController::class, "getLog"]);
     Route::post("/exercise", [ExerciseController::class, "createExercise"]);
     Route::post("student/report", [ExerciseController::class, "sendReport"]);
+    Route::post("/contest/", [ContestController::class, 'getContest']);
 });
 Route::post("/login", [UserController::class, "login"]);
 Route::get("/minutes", function () {
