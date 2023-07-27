@@ -60,6 +60,11 @@ class ContestController extends Controller
 
     public function checkContest(Request $request)
     {
+        /**
+         * @var Contest $contest
+         */
+        $contest = Contest::query()->find($request["contest_id"]);
+        $total = count($contest["body"]);
         $correctAnswer = 0;
         foreach ($request["submitData"] as $data) {
             if (isset($data["user_choose"])) {
@@ -75,9 +80,9 @@ class ContestController extends Controller
         }
         DB::table("customer_contest")->where("contest_id", $request["contest_id"])->where("customer_id", $request->user()->id)->update([
             'correct' => $correctAnswer,
-            'total' => count($request["submitData"]),
+            'total' => $total,
             'correct_task' => $request['submitData'],
-            'score' => ($correctAnswer / count($request['submitData'])) * 100
+            'score' => ($correctAnswer / $total) * 100
         ]);
         return true;
     }
